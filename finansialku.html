@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Premium User Profile Screen</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style type="text/tailwindcss">
+        :root {
+            --primary: #3498db;
+            --secondary: #f39c12;
+            --background-light: #F8FAFC;
+            --background-dark: #0F172A;
+        }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-header {
+            background: rgba(52, 152, 219, 1);
+            position: relative;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3498db",
+                        secondary: "#f39c12",
+                        "background-light": "#F8FAFC",
+                        "background-dark": "#0F172A",
+                    },
+                    fontFamily: {
+                        display: ["Plus Jakarta Sans", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "1.25rem",
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 dark:bg-slate-950 min-h-screen flex items-center justify-center p-4">
+    <div
+        class="relative w-full max-w-[390px] h-[844px] bg-[#F8FAFC] dark:bg-slate-900 overflow-hidden shadow-2xl border-[8px] border-slate-200 dark:border-slate-800 rounded-[3rem]">
+        <div class="absolute top-0 w-full h-11 flex justify-between items-center px-8 z-50">
+            <span class="text-xs font-bold dark:text-white">9:41</span>
+            <div class="flex gap-1.5">
+                <span class="material-symbols-outlined text-[14px] dark:text-white">signal_cellular_alt</span>
+                <span class="material-symbols-outlined text-[14px] dark:text-white">wifi</span>
+                <span class="material-symbols-outlined text-[14px] dark:text-white">battery_full</span>
+            </div>
+        </div>
+        <div
+            class="glass-header text-white pt-16 pb-24 px-6 rounded-b-[3.5rem] relative overflow-hidden flex flex-col items-center">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+            <div class="relative">
+                <div class="w-24 h-24 rounded-full border-4 border-white/30 p-1 mb-4">
+                    <img alt="Profile" class="w-full h-full object-cover rounded-full"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDztHJzjTmkHgLvK0kciF_bwKJ60qJcX11f5Z7dPqDriXeZ2KdbIswMTzj4NhrvHxzeYvNAbGSdyfzr1ORkh0IG2_RqoVHhoxpFPC_wB65PCUIEYaYTktRrpHZk-zGJxeQrXBLRGryUKZvFA4HFlFzNjr6p1AMSxYQXa-5WBkv_FRGf3y08qbVp_n80Jwuv1GvNtwse6qpTqLP4vE3-5CLmnNuFdoDT811Wzi4GzcUy_XYEIDgUFV1ude2VsHqXaRtQNynN2cCxss2A" />
+                </div>
+                <div class="absolute bottom-1 right-1 w-6 h-6 bg-green-500 border-2 border-white rounded-full"></div>
+            </div>
+            <h1 class="text-xl font-bold tracking-tight">Alexander Graham</h1>
+            <div class="mt-1 px-3 py-1 bg-white/20 backdrop-blur-md rounded-full border border-white/10">
+                <span class="text-[10px] font-bold uppercase tracking-widest text-white/90">Premium Member</span>
+            </div>
+        </div>
+        <div class="absolute inset-0 pt-[280px] overflow-y-auto pb-32 px-6 hide-scrollbar">
+            <div class="space-y-4">
+                <div
+                    class="bg-white dark:bg-slate-800 p-5 rounded-[2rem] shadow-sm border border-slate-100 dark:border-slate-700 flex items-center justify-between group cursor-pointer active:scale-[0.98] transition-all">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-10 h-10 bg-blue-50 dark:bg-blue-900/30 rounded-xl flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined text-[20px]">person</span>
+                        </div>
+                        <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Personal
+                            Information</span>
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-slate-300 dark:text-slate-600 text-[20px]">chevron_right</span>
+                </div>
+                <div
+                    class="bg-white dark:bg-slate-800 p-5 rounded-[2rem] shadow-sm border border-slate-100 dark:border-slate-700 flex items-center justify-between group cursor-pointer active:scale-[0.98] transition-all">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-10 h-10 bg-indigo-50 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center text-indigo-500">
+                            <span class="material-symbols-outlined text-[20px]">lock</span>
+                        </div>
+                        <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Account Security</span>
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-slate-300 dark:text-slate-600 text-[20px]">chevron_right</span>
+                </div>
+                <div
+                    class="bg-white dark:bg-slate-800 p-5 rounded-[2rem] shadow-sm border border-slate-100 dark:border-slate-700 flex items-center justify-between group cursor-pointer active:scale-[0.98] transition-all">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-10 h-10 bg-emerald-50 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center text-emerald-500">
+                            <span class="material-symbols-outlined text-[20px]">credit_card</span>
+                        </div>
+                        <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">Payment Methods</span>
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-slate-300 dark:text-slate-600 text-[20px]">chevron_right</span>
+                </div>
+                <div
+                    class="bg-white dark:bg-slate-800 p-5 rounded-[2rem] shadow-sm border border-slate-100 dark:border-slate-700 flex items-center justify-between group cursor-pointer active:scale-[0.98] transition-all">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-10 h-10 bg-orange-50 dark:bg-orange-900/30 rounded-xl flex items-center justify-center text-orange-500">
+                            <span class="material-symbols-outlined text-[20px]">settings</span>
+                        </div>
+                        <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">App Settings</span>
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-slate-300 dark:text-slate-600 text-[20px]">chevron_right</span>
+                </div>
+                <div class="pt-8">
+                    <button
+                        class="w-full bg-rose-50 dark:bg-rose-900/10 text-rose-500 py-4 rounded-[2rem] font-bold text-sm tracking-wide flex items-center justify-center gap-2 border border-rose-100 dark:border-rose-900/20 active:scale-[0.98] transition-all">
+                        <span class="material-symbols-outlined text-[20px]">logout</span>
+                        Logout Account
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div
+            class="absolute bottom-0 w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-100 dark:border-slate-800 h-20 px-4 flex justify-around items-center z-50">
+            <div class="flex flex-col items-center gap-1 text-slate-300 dark:text-slate-600 cursor-pointer">
+                <span class="material-symbols-outlined">home</span>
+                <span class="text-[10px] font-medium">Home</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 text-slate-300 dark:text-slate-600 cursor-pointer">
+                <span class="material-symbols-outlined">receipt_long</span>
+                <span class="text-[10px] font-medium">History</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 text-slate-300 dark:text-slate-600 cursor-pointer">
+                <span class="material-symbols-outlined">insights</span>
+                <span class="text-[10px] font-medium">Trends</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 text-primary cursor-pointer">
+                <span class="material-symbols-outlined">person</span>
+                <span class="text-[10px] font-bold">Profile</span>
+            </div>
+        </div>
+        <div
+            class="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-32 h-1 bg-slate-200 dark:bg-slate-800 rounded-full z-[60]">
+        </div>
+    </div>
+    <div class="fixed bottom-4 right-4 flex flex-col gap-2">
+        <button
+            class="w-12 h-12 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-full shadow-lg flex items-center justify-center"
+            onclick="document.documentElement.classList.toggle('dark')">
+            <span class="material-symbols-outlined">dark_mode</span>
+        </button>
+    </div>
+
+</body>
+
+</html>
