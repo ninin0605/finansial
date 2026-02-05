@@ -858,6 +858,104 @@
         let currentBudgetMonth = new Date();
         currentBudgetMonth.setDate(1);
 
+        // --- Local Storage Helpers ---
+        const STORAGE_KEY = 'finansial_app_data';
+        let isInternalUpdate = false;
+
+        function saveData() {
+            if (isInternalUpdate) return;
+            try {
+                const profileObj = {};
+                const elNama = document.getElementById('editNamaLengkap');
+                const elEmail = document.getElementById('editEmail');
+                const elPhone = document.getElementById('editPhone');
+                const elAddress = document.getElementById('editAddress');
+                const elAvatar = document.getElementById('modalAvatar');
+
+                if (elNama) profileObj.nama = elNama.value;
+                if (elEmail) profileObj.email = elEmail.value;
+                if (elPhone) profileObj.phone = elPhone.value;
+                if (elAddress) profileObj.address = elAddress.value;
+                if (elAvatar) profileObj.avatar = elAvatar.src;
+
+                const budgetObj = {};
+                const categories = ['Pokok', 'Transport', 'Hiburan', 'Tagihan', 'Lain'];
+                categories.forEach(cat => {
+                    const el = document.getElementById(`limit${cat}`);
+                    if (el) budgetObj[cat] = el.value;
+                });
+
+                const data = {
+                    riwayatTransaksi,
+                    profile: profileObj,
+                    budgets: budgetObj
+                };
+
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+                console.log('Data berhasil disimpan');
+            } catch (e) {
+                console.error('Gagal menyimpan data ke localStorage:', e);
+            }
+        }
+
+        function loadData() {
+            isInternalUpdate = true;
+            try {
+                const savedData = localStorage.getItem(STORAGE_KEY);
+                if (savedData) {
+                    const data = JSON.parse(savedData);
+
+                    // Restore Transactions
+                    riwayatTransaksi = data.riwayatTransaksi || [];
+                    riwayatTransaksi.forEach(t => t.tanggal = new Date(t.tanggal));
+
+                    // Recalculate Totals
+                    totalPemasukan = 0;
+                    totalPengeluaran = 0;
+                    riwayatTransaksi.forEach(t => {
+                        if (t.tipe === 'pemasukan') totalPemasukan += t.jumlah;
+                        else totalPengeluaran += t.jumlah;
+                    });
+
+                    // Restore Profile
+                    if (data.profile) {
+                        const p = data.profile;
+                        const elNama = document.getElementById('editNamaLengkap');
+                        const elEmail = document.getElementById('editEmail');
+                        const elPhone = document.getElementById('editPhone');
+                        const elAddress = document.getElementById('editAddress');
+                        const elAvatar = document.getElementById('modalAvatar');
+                        const elModalName = document.getElementById('modalProfileName');
+
+                        if (p.nama && elNama) elNama.value = p.nama;
+                        if (p.nama && elModalName) elModalName.innerText = p.nama;
+                        if (p.email && elEmail) elEmail.value = p.email;
+                        if (p.phone && elPhone) elPhone.value = p.phone;
+                        if (p.address && elAddress) elAddress.value = p.address;
+                        if (p.avatar && elAvatar) elAvatar.src = p.avatar;
+                    }
+
+                    // Restore Budgets
+                    if (data.budgets) {
+                        for (const cat in data.budgets) {
+                            const el = document.getElementById(`limit${cat}`);
+                            if (el) el.value = data.budgets[cat];
+                        }
+                    }
+                }
+            } catch (e) {
+                console.error('Gagal memuat data dari localStorage:', e);
+            }
+
+            updateDisplay();
+            updateAllBudgetProgress();
+            isInternalUpdate = false;
+        }
+
+        // Helper to save specifically one part if needed, but saveData is now unified
+        function saveProfileData() { saveData(); }
+        function saveBudgetLimits() { saveData(); }
+
         // --- UI Update Helpers ---
         function updateDisplay() {
             const saldo = totalPemasukan - totalPengeluaran;
@@ -890,6 +988,7 @@
                     keterangan: keterangan || 'Pemasukan',
                     tanggal: new Date()
                 });
+                saveData();
                 updateDisplay();
                 alert('Pemasukan berhasil ditambahkan!');
                 navigateTo('pageHome');
@@ -914,6 +1013,7 @@
                     kategori: kategori,
                     tanggal: new Date()
                 });
+                saveData();
                 updateDisplay();
                 updateAllBudgetProgress();
                 alert('Pengeluaran berhasil ditambahkan!');
@@ -1053,6 +1153,8 @@
             // Update modal display (for the name in profile header)
             document.getElementById('modalProfileName').innerText = newName;
 
+            saveProfileData();
+
             alert('Data pribadi berhasil diperbarui!');
             navigateTo('pagePengaturan');
         }
@@ -1097,6 +1199,7 @@
 
         function updateBudgetProgress(category) {
             const limit = parseInt(document.getElementById(`limit${category}`).value) || 0;
+            saveBudgetLimits();
 
             // Calculate total spent for this category in the current selected month
             const used = riwayatTransaksi
@@ -1170,6 +1273,7 @@
                     // Note: If you add a profile image to the header later, 
                     // update it here using its ID (e.g., document.getElementById('headerAvatar').src = newPhotoUrl;)
 
+                    saveProfileData();
                     alert('Foto profil berhasil diperbarui!');
                 }
                 reader.readAsDataURL(file);
@@ -1198,8 +1302,11 @@
             `;
         }
 
-        // Initial Highlight
-        updateNavHighlight('pageHome');
+        // Initial Load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            updateNavHighlight('pageHome');
+        });
     </script>
     <input type="file" id="profilePhotoInput" accept="image/*" class="hidden"
         onchange="handleProfilePhotoChange(event)">
