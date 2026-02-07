@@ -826,12 +826,13 @@
                         <span class="material-icons-round text-base">expand_more</span>
                     </button>
                     <div class="relative">
-                        <button onclick="document.getElementById('rekapMonthPicker').showPicker()"
-                            class="flex items-center gap-2 px-4 py-2.5 border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 rounded-xl text-xs font-bold active:scale-95 transition-all">
+                        <div
+                            class="flex items-center gap-2 px-4 py-2.5 border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 rounded-xl text-xs font-bold">
                             <span class="material-icons-round text-base">calendar_today</span>
                             <span>Tanggal</span>
-                        </button>
-                        <input type="month" id="rekapMonthPicker" class="absolute inset-0 opacity-0 pointer-events-none"
+                        </div>
+                        <input type="month" id="rekapMonthPicker"
+                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                             onchange="handleRekapMonthChange(this.value)">
                     </div>
                 </div>
@@ -854,12 +855,13 @@
                 </button>
                 <h2 class="text-xl font-extrabold text-slate-900 dark:text-white">Riwayat Transaksi</h2>
                 <div class="relative">
-                    <button onclick="document.getElementById('transactionDatePicker').showPicker()"
-                        class="w-12 h-12 rounded-full border border-slate-100 dark:border-slate-800 flex items-center justify-center shadow-sm active:scale-95 transition-all">
+                    <div
+                        class="w-12 h-12 rounded-full border border-slate-100 dark:border-slate-800 flex items-center justify-center shadow-sm">
                         <span class="material-icons-round text-slate-800 dark:text-white">calendar_today</span>
-                    </button>
+                    </div>
                     <input type="month" id="transactionDatePicker"
-                        class="absolute inset-0 opacity-0 pointer-events-none" onchange="handleMonthSelect(this.value)">
+                        class="absolute inset-0 w-full h-full opacity-0 cursor-pointer rounded-full"
+                        onchange="handleMonthSelect(this.value)">
                 </div>
 
 
